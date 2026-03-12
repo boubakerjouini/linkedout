@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Brand Colors */
+  --color-cream: #fafaf7;
+  --color-cream-putty: #f0ede7;
+  --color-cream-mist: #e8e4dc;
+  --color-coral: #e8472a;
+  --color-coral-light: #f9ddd9;
+  --color-citrus: #f5c842;
+  --color-citrus-light: #fef8e3;
+  --color-sage: #4caf74;
+  --color-sage-light: #e0f5e9;
+  --color-ink: #1c1917;
+  --color-ink-secondary: #44403c;
+  --color-ink-tertiary: #78716c;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Shadows */
+  --shadow-editorial: 4px 4px 0px 0px #1c1917;
+  --shadow-editorial-sm: 2px 2px 0px 0px #1c1917;
+  --shadow-editorial-lg: 6px 6px 0px 0px #1c1917;
+}
+
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-cream-putty: var(--color-cream-putty);
+  --color-cream-mist: var(--color-cream-mist);
+  --color-coral: var(--color-coral);
+  --color-coral-light: var(--color-coral-light);
+  --color-citrus: var(--color-citrus);
+  --color-citrus-light: var(--color-citrus-light);
+  --color-sage: var(--color-sage);
+  --color-sage-light: var(--color-sage-light);
+  --color-ink: var(--color-ink);
+  --color-ink-secondary: var(--color-ink-secondary);
+  --color-ink-tertiary: var(--color-ink-tertiary);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-brand {
+  font-family: var(--font-mono);
+}
+
+/* Editorial shadow utilities */
+.shadow-editorial {
+  box-shadow: var(--shadow-editorial);
+}
+
+.shadow-editorial-sm {
+  box-shadow: var(--shadow-editorial-sm);
+}
+
+.shadow-editorial-lg {
+  box-shadow: var(--shadow-editorial-lg);
+}
+
+/* Cringe Badge stamp effect */
+.cringe-stamp {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-style: dashed;
+  border-width: 2px;
+  display: inline-block;
+}
+
+/* Coral underline effect for hero */
+.coral-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.coral-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--color-coral);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-putty);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cream-mist);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-tertiary);
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-coral-light);
+  color: var(--color-ink);
+}
+
+/* Textarea & Input base */
+textarea, input[type="text"], input[type="email"] {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  border: 1px solid var(--color-cream-mist);
+  resize: vertical;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  border-color: var(--color-coral);
+  box-shadow: var(--shadow-editorial-sm);
+}
+
+/* Noise texture overlay for surfaces */
+.noise-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
