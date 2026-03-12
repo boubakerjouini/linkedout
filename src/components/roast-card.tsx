@@ -3,7 +3,7 @@
 import { CringeBadge, type CringeLevel } from '@/components/ui/cringe-badge';
 import { Button } from '@/components/ui/button';
 import { Copy, Share2, RefreshCw, Quote } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface RoastCardProps {
   roast: string;
@@ -15,6 +15,14 @@ interface RoastCardProps {
 
 export function RoastCard({ roast, cringe_level, cringe_score, originalPost, onRoastAgain }: RoastCardProps) {
   const [copied, setCopied] = useState(false);
+  const [animatedScore, setAnimatedScore] = useState(0);
+
+  // Animate bar from 0 → real score on mount
+  useEffect(() => {
+    setAnimatedScore(0);
+    const t = setTimeout(() => setAnimatedScore(cringe_score), 80);
+    return () => clearTimeout(t);
+  }, [cringe_score]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(roast);
@@ -34,7 +42,7 @@ export function RoastCard({ roast, cringe_level, cringe_score, originalPost, onR
     }
   };
 
-  const scoreWidth = `${cringe_score}%`;
+  const scoreWidth = `${animatedScore}%`;
 
   const scoreColor =
     cringe_level === 'low'
