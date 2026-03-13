@@ -181,9 +181,10 @@ export default function RoastPage() {
               setPost(e.target.value);
               if (error) setError(null);
             }}
-            placeholder="Paste a LinkedIn post here… 
+            placeholder="Paste a LinkedIn post here…
 
 Try something like: 'Excited to announce I just quit my 6-figure job to pursue my passion for disruptive synergy. The corporate world simply wasn't ready. 🚀 #Hustle'"
+            aria-label="LinkedIn post to roast"
             className="w-full px-5 py-4 min-h-[220px] text-sm text-[#1c1917] bg-transparent focus:outline-none placeholder:text-[#78716c] resize-y"
             style={{ fontFamily: 'var(--font-body)', lineHeight: '1.7' }}
           />
