@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Copy, ThumbsUp, MessageSquare, Share2, Twitter, Linkedin } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface GeneratedPost {
   content: string;
@@ -24,6 +24,8 @@ const toxicLabels: Record<number, { label: string; color: string; bg: string; bo
   5: { label: '5/5 — ULTRA TOXIC ⚡',   color: '#fafaf7', bg: '#1c1917', border: '#1c1917' },
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://linkedout-kappa.vercel.app';
+
 export function GeneratorCard({ post, index }: GeneratorCardProps) {
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -33,10 +35,15 @@ export function GeneratorCard({ post, index }: GeneratorCardProps) {
 
   const fullPost = `${post.content}\n\n${post.hashtags}`;
 
-  const shareText = `Look what LinkedOut generated for me 😂\n\n"${post.content.slice(0, 200)}..."\n\nGenerate your own toxic LinkedIn post 👇\nlinkedout-kappa.vercel.app/generate`;
+  const engagement = useMemo(() => ({
+    likes: (Math.floor(Math.random() * 9000 + 500)).toLocaleString(),
+    comments: Math.floor(Math.random() * 500 + 20),
+  }), []);
+
+  const shareText = `Look what LinkedOut generated for me 😂\n\n"${post.content.slice(0, 200)}..."\n\nGenerate your own toxic LinkedIn post 👇\n${BASE_URL}/generate`;
 
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://linkedout-kappa.vercel.app/generate')}`;
+  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${BASE_URL}/generate`)}`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(fullPost);
@@ -107,10 +114,10 @@ export function GeneratorCard({ post, index }: GeneratorCardProps) {
         {/* Fake engagement */}
         <div className="px-4 py-2 border-t border-[#e8e4dc] flex items-center justify-between">
           <span className="text-[10px] text-[#78716c]" style={{ fontFamily: 'var(--font-mono)' }}>
-            👍❤️🔥 {(Math.floor(Math.random() * 9000 + 500)).toLocaleString()}
+            👍❤️🔥 {engagement.likes}
           </span>
           <span className="text-[10px] text-[#78716c]" style={{ fontFamily: 'var(--font-mono)' }}>
-            {Math.floor(Math.random() * 500 + 20)} comments
+            {engagement.comments} comments
           </span>
         </div>
 

@@ -208,6 +208,7 @@ export default function GeneratePage() {
               onChange={(e) => { setPrompt(e.target.value); if (error) setError(null); }}
               onKeyDown={handleKeyDown}
               placeholder="e.g., 'Getting fired from my first startup' or 'Waking up at 4am every day'"
+              aria-label="Topic or description for post generation"
               className="w-full text-base text-[#1c1917] bg-transparent focus:outline-none placeholder:text-[#78716c]"
               style={{ fontFamily: 'var(--font-body)' }}
             />
@@ -252,7 +253,7 @@ export default function GeneratePage() {
 
         {/* Results */}
         {posts.length > 0 && !loading && (
-          <div id="generated-posts">
+          <div id="generated-posts" aria-live="polite">
             <div className="flex items-center justify-between mb-5">
               <div>
                 <h2 className="text-2xl font-bold text-[#1c1917]"

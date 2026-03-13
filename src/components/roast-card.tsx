@@ -13,7 +13,7 @@ interface RoastCardProps {
   onRoastAgain?: () => void;
 }
 
-const BASE_URL = 'https://linkedout-kappa.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://linkedout-kappa.vercel.app';
 
 const TEMPLATES = [
   { id: 1, label: 'Editorial Cream' },
@@ -68,7 +68,8 @@ export function RoastCard({ roast, cringe_level, cringe_score, originalPost, onR
 
   return (
     <div className="border border-[#e8e4dc] border-l-4 border-l-[#e8472a] bg-[#fafaf7]"
-      style={{ boxShadow: '4px 4px 0px 0px #1c1917' }}>
+      style={{ boxShadow: '4px 4px 0px 0px #1c1917' }}
+      aria-live="polite">
 
       {/* Header */}
       <div className="flex items-start justify-between p-6 pb-4">
